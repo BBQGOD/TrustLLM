@@ -1,7 +1,8 @@
 import os, json
 from anthropic import Anthropic, HUMAN_PROMPT, AI_PROMPT
 import google.generativeai as genai
-from google.generativeai.types import safety_types
+from google.generativeai.types.safety_types import HarmCategory, HarmBlockThreshold
+import httpx
 from fastchat.model import load_model, get_conversation_template
 from openai import OpenAI,AzureOpenAI
 from tenacity import retry, wait_random_exponential, stop_after_attempt
@@ -19,12 +20,12 @@ rev_model_mapping = {value: key for key, value in model_mapping.items()}
 
 # Define safety settings to allow harmful content generation
 safety_setting = [
-    {"category": safety_types.HarmCategory.HARM_CATEGORY_DEROGATORY, "threshold": safety_types.HarmBlockThreshold.BLOCK_NONE},
-    {"category": safety_types.HarmCategory.HARM_CATEGORY_VIOLENCE, "threshold": safety_types.HarmBlockThreshold.BLOCK_NONE},
-    {"category": safety_types.HarmCategory.HARM_CATEGORY_SEXUAL, "threshold": safety_types.HarmBlockThreshold.BLOCK_NONE},
-    {"category": safety_types.HarmCategory.HARM_CATEGORY_TOXICITY, "threshold": safety_types.HarmBlockThreshold.BLOCK_NONE},
-    {"category": safety_types.HarmCategory.HARM_CATEGORY_MEDICAL, "threshold": safety_types.HarmBlockThreshold.BLOCK_NONE},
-    {"category": safety_types.HarmCategory.HARM_CATEGORY_DANGEROUS, "threshold": safety_types.HarmBlockThreshold.BLOCK_NONE},
+    {"category": HarmCategory.HARM_CATEGORY_DEROGATORY, "threshold": HarmBlockThreshold.BLOCK_NONE},
+    {"category": HarmCategory.HARM_CATEGORY_VIOLENCE, "threshold": HarmBlockThreshold.BLOCK_NONE},
+    {"category": HarmCategory.HARM_CATEGORY_SEXUAL, "threshold": HarmBlockThreshold.BLOCK_NONE},
+    {"category": HarmCategory.HARM_CATEGORY_TOXICITY, "threshold": HarmBlockThreshold.BLOCK_NONE},
+    {"category": HarmCategory.HARM_CATEGORY_MEDICAL, "threshold": HarmBlockThreshold.BLOCK_NONE},
+    {"category": HarmCategory.HARM_CATEGORY_DANGEROUS, "threshold": HarmBlockThreshold.BLOCK_NONE},
 ]
 
 # Retrieve model information
@@ -51,10 +52,14 @@ def get_ernie_res(string, temperature):
 
 # Function to generate responses using OpenAI's API
 def get_res_openai(string, model, temperature):
-    gpt_model_mapping = {"chatgpt": "gpt-3.5-turbo", "gpt-4": "gpt-4-1106-preview"}
+    gpt_model_mapping = {"gpt-3.5-turbo-0125": "gpt-3.5-turbo-0125", "gpt-4": "gpt-4-1106-preview"}
     gpt_model = gpt_model_mapping[model]
     api_key = trustllm.config.openai_key
-    client = OpenAI(api_key=api_key)
+    api_base = trustllm.config.openai_api_base
+    client = OpenAI(api_key=api_key, base_url=api_base, http_client=httpx.Client(
+        base_url=api_base,
+        follow_redirects=True,
+    ))
     response = client.chat.completions.create(model=gpt_model, messages=[{"role": "user", "content": string}], temperature=temperature)
     return response.choices[0].message.content if response.choices[0].message.content else ValueError("Empty response from API")
 

@@ -37,7 +37,7 @@ deepinfra_model = [
     "yi-34b"]
 zhipu_model = ["glm-4", "glm-3-turbo"]
 claude_model = ["claude-2", "claude-instant-1"]
-openai_model = ["chatgpt", "gpt-4"]
+openai_model = ["gpt-3.5-turbo-0125", "gpt-4"]
 google_model = ["bison-001", "gemini"]
 wenxin_model = ["ernie"]
 replicate_model=["vicuna-7b","vicuna-13b","vicuna-33b","chatglm3-6b","llama3-70b","llama3-8b"]
@@ -75,7 +75,7 @@ model_info = {
         "databricks/dolly-v2-12b": "dolly-12b",
         "bison-001": "bison-001",
         "ernie": "ernie",
-        "chatgpt": "chatgpt",
+        "gpt-3.5-turbo-0125": "gpt-3.5-turbo-0125",
         "gpt-4": "gpt-4",
         "claude-2": "claude-2",
         "glm-4": "glm-4",

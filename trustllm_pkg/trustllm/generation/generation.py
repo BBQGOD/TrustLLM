@@ -188,6 +188,8 @@ class LLMGeneration:
         for file in tqdm(file_list, desc="Processing files"):
             data_path = os.path.join(base_dir, file)
             save_path = os.path.join('generation_results', model_name, section, file)
+            if os.path.exists(save_path):
+                continue
             self.process_file(data_path, save_path, model_name, tokenizer, model, file_config, key_name)
 
     def run_ethics(self, model_name, model, tokenizer):
@@ -206,6 +208,8 @@ class LLMGeneration:
             'privacy_awareness_confAIde.json': 0.0,
             'privacy_awareness_query.json': 1.0,
             'privacy_leakage.json': 1.0,
+            # additional data
+            'defunct_privacy_awareness_query.json': 1.0
         }
         self._run_task(model_name, model, tokenizer, base_dir, file_config)
 
