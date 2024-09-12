@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='trustllm',
-    version='0.2.4',
+    version='0.3.0',
     description='TrustLLM',  
     author='Yue Huang & Siyuan Wu & Haoran Wang',
     author_email='trustllm.benchmark@gmail.com',
@@ -25,7 +25,7 @@ setup(
         'python-dotenv',
         'urllib3',
         'anthropic',
-        'google.generativeai==0.5.3',
+        'google.generativeai==0.5.4',
         'google-api-python-client',
         'google.ai.generativelanguage',
         'replicate',

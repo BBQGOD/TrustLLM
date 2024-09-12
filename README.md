@@ -14,6 +14,9 @@
 [![Leaderboard](https://img.shields.io/badge/Leaderboard-%F0%9F%9A%80-brightgreen?style=for-the-badge&logoWidth=40)](https://trustllmbenchmark.github.io/TrustLLM-Website/leaderboard.html)
 [![Toolkit Document](https://img.shields.io/badge/Toolkit%20Document-%F0%9F%93%9A-blueviolet?style=for-the-badge&logoWidth=40)](https://howiehwong.github.io/TrustLLM/)
 
+[![Downloads](https://static.pepy.tech/badge/trustllm)](https://pepy.tech/project/trustllm)
+[![Downloads](https://static.pepy.tech/badge/trustllm/month)](https://pepy.tech/project/trustllm)
+[![Downloads](https://static.pepy.tech/badge/trustllm/week)](https://pepy.tech/project/trustllm)
 
 
 <img src="https://img.shields.io/github/last-commit/HowieHwong/TrustLLM?style=flat-square&color=5D6D7E" alt="git-last-commit" />
@@ -30,6 +33,8 @@
 
 
 ## Updates & News
+- [01/09/2024] **TrustLLM** toolkit has been downloaded for 4000+ times!
+- [15/07/2024] **TrustLLM** now supports [**UniGen**](https://unigen-framework.github.io/) for dynamic evaluation.
 - [02/05/2024] 🥂 **TrustLLM has been accepted by ICML 2024! See you in Vienna!**
 - [23/04/2024] :star: Version 0.3.0: Major updates including bug fixes, enhanced evaluation, and new models added (including ChatGLM3, Llama3-8b, Llama3-70b, GLM4, Mixtral). ([See details](https://howiehwong.github.io/TrustLLM/changelog.html))
 - [20/03/2024] :star: Version 0.2.4: Fixed many bugs & Support Gemini Pro API
@@ -259,7 +264,7 @@ If you intend to make improvements to the toolkit, please fork the repository fi
 ## **⏰ TODO in Coming Versions**
 
 - [x] Faster and simpler evaluation pipeline  (**Version 0.2.1**)
-- [ ] Dynamic dataset  
+- [x] Dynamic dataset  ([UniGen](https://unigen-framework.github.io/))
 - [ ] More fine-grained datasets
 - [ ] Chinese output evaluation
 - [ ] Downstream application evaluation
