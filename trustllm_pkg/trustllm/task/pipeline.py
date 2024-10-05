@@ -168,6 +168,8 @@ def run_privacy(
     privacy_confAIde_path=None,
     privacy_awareness_query_path=None,
     privacy_leakage_path=None,
+    defunct_privacy_awareness_query_path=None,
+    defunct_privacy_awareness_query_v2_path=None,
 ):
         
     if all_folder_path:
@@ -182,8 +184,20 @@ def run_privacy(
         privacy_confAIde_res,
         privacy_awareness_query_normal_res,
         privacy_awareness_query_aug_res,
+        privacy_awareness_query_defuct_res,
+        privacy_awareness_query_defuct_v2_1_res,
+        privacy_awareness_query_defuct_v2_2_res,
+        privacy_awareness_query_defuct_v2_3_res,
+        privacy_awareness_query_defuct_v2_4_res,
+        privacy_awareness_query_defuct_v2_5_res,
         privacy_leakage_res,
     ) = (
+        None,
+        None,
+        None,
+        None,
+        None,
+        None,
         None,
         None,
         None,
@@ -205,6 +219,34 @@ def run_privacy(
             privacy_awareness_query_data, type="aug"
         )
 
+    if defunct_privacy_awareness_query_path is not None:
+        privacy_awareness_query_data = file_process.load_json(
+            defunct_privacy_awareness_query_path
+        )
+        privacy_awareness_query_defuct_res = evaluator.awareness_query_eval(
+            privacy_awareness_query_data, type="defunct_v1"
+        )
+
+    if defunct_privacy_awareness_query_v2_path is not None:
+        privacy_awareness_query_data = file_process.load_json(
+            defunct_privacy_awareness_query_v2_path
+        )
+        privacy_awareness_query_defuct_v2_1_res = evaluator.awareness_query_eval(
+            privacy_awareness_query_data, type="defunct_v2Authority endorsement"
+        )
+        privacy_awareness_query_defuct_v2_2_res = evaluator.awareness_query_eval(
+            privacy_awareness_query_data, type="defunct_v2Evidence-based Persuasion"
+        )
+        privacy_awareness_query_defuct_v2_3_res = evaluator.awareness_query_eval(
+            privacy_awareness_query_data, type="defunct_v2Expert Endorsement"
+        )
+        privacy_awareness_query_defuct_v2_4_res = evaluator.awareness_query_eval(
+            privacy_awareness_query_data, type="defunct_v2Logical appeal"
+        )
+        privacy_awareness_query_defuct_v2_5_res = evaluator.awareness_query_eval(
+            privacy_awareness_query_data, type="defunct_v2Misrepresentation"
+        )
+
     if privacy_leakage_path is not None:
         privacy_leakage_data = file_process.load_json(privacy_leakage_path)
         privacy_leakage_res = evaluator.leakage_eval(privacy_leakage_data)
@@ -213,6 +255,12 @@ def run_privacy(
         "privacy_confAIde": privacy_confAIde_res,
         "privacy_awareness_query_normal": privacy_awareness_query_normal_res,
         "privacy_awareness_query_aug": privacy_awareness_query_aug_res,
+        "privacy_awareness_query_defuct": privacy_awareness_query_defuct_res,
+        "privacy_awareness_query_defuct_v2_1": privacy_awareness_query_defuct_v2_1_res,
+        "privacy_awareness_query_defuct_v2_2": privacy_awareness_query_defuct_v2_2_res,
+        "privacy_awareness_query_defuct_v2_3": privacy_awareness_query_defuct_v2_3_res,
+        "privacy_awareness_query_defuct_v2_4": privacy_awareness_query_defuct_v2_4_res,
+        "privacy_awareness_query_defuct_v2_5": privacy_awareness_query_defuct_v2_5_res,
         "privacy_leakage": privacy_leakage_res,
     }
 

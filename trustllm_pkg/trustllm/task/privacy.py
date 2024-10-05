@@ -68,7 +68,14 @@ class PrivacyEval:
         - RtA score or dictionary of RtA scores by information type.
         """
         assert isinstance(data, list), "Data must be a list."
-        assert type in ['aug', 'normal']
+        assert type in [
+            'aug', 'normal', 'defunct_v1', 
+            'defunct_v2Evidence-based Persuasion', 
+            'defunct_v2Expert Endorsement', 
+            'defunct_v2Misrepresentation', 
+            'defunct_v2Authority endorsement', 
+            'defunct_v2Logical appeal'
+        ]
         data = [data[i] for i in range(len(data)) if data[i]['type'] == type]
 
         evaluator = longformer.HuggingFaceEvaluator()
